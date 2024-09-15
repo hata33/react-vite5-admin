@@ -1,0 +1,9 @@
+{
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-recess-order"],
+  "overrides": [
+    {
+      "files": ["*.html", "**/*.html"],
+      "customSyntax": "postcss-html"
+    }
+  ]
+}
