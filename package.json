@@ -13,8 +13,16 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.21.1",
+    "@tanstack/react-query": "^4.36.1",
+    "@tanstack/react-query-devtools": "^4.36.1",
+    "antd": "^5.20.6",
+    "axios": "^1.7.7",
+    "loadsh": "^0.0.4",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2",
+    "zustand": "5.0.0-rc.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
@@ -23,6 +31,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "autoprefixer": "^10.4.20",
     "eslint": "^9.9.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
@@ -32,15 +41,20 @@
     "postcss": "^8.4.47",
     "postcss-html": "^1.7.0",
     "postcss-lit": "^1.1.1",
+    "postcss-nesting": "^13.0.0",
     "postcss-scss": "^4.0.9",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.6",
+    "react-icons": "^5.3.0",
+    "rollup-plugin-visualizer": "^5.12.0",
     "stylelint": "^16.9.0",
     "stylelint-config-recess-order": "^5.1.0",
     "stylelint-config-standard": "^36.0.1",
     "stylelint-config-standard-scss": "^13.1.0",
+    "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vite-plugin-svg-icons": "^2.0.1"
   }
 }
