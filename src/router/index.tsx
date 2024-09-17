@@ -18,14 +18,14 @@ export default function Router() {
         { path: 'blog', element: <Blog /> },
       ],
     },
-    // {
-    //   path: '/test',
-    //   children: [
-    //     { element: <Navigate to="/test/zustand" />, index: true },
-    //     { path: 'zustand', element: <Zustand /> },
-    //     { path: 'react-query', element: <ReactQuery /> },
-    //   ],
-    // },
+    {
+      path: '/test',
+      children: [
+        { element: <Navigate to="/test/zustand" />, index: true },
+        { path: 'zustand', element: <Zustand /> },
+        { path: 'react-query', element: <ReactQuery /> },
+      ],
+    },
     {
       path: '/login',
       element: <Login />,
