@@ -1,4 +1,4 @@
-import { SvgIcon } from '@/components/icons';
+import { SvgIcon } from '@/components/icon';
 
 function Dashboard() {
   return (

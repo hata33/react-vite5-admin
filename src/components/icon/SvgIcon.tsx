@@ -25,7 +25,6 @@ export default function SvgIcon({
     color,
     ...style,
   };
-  console.log(symbolId, 'symbolId');
   return (
     <div>
       <svg
@@ -35,13 +34,6 @@ export default function SvgIcon({
         style={svgStyle}
       >
         <use xlinkHref={symbolId} fill="currentColor" />
-      </svg>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 100 100"
-        className="anticon fill-current inline-block h-[1em] w-[1em] overflow-hidden outline-none"
-      >
-        <use xlinkHref={'#icon-ic-user'} fill="currentColor"></use>
       </svg>
     </div>
   );
