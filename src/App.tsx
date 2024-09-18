@@ -1,21 +1,9 @@
-import { StyleProvider } from '@ant-design/cssinjs';
-import { ConfigProvider } from 'antd';
-import { BrowserRouter } from 'react-router-dom';
-
-import Router from './router';
-import { theme } from './theme/theme';
-import './theme/index.css';
+import Routers from './router';
 function App() {
   return (
-    <BrowserRouter>
-      <ConfigProvider theme={theme}>
-        <StyleProvider hashPriority="high">
-          <div className="h-full w-full">
-            <Router />
-          </div>
-        </StyleProvider>
-      </ConfigProvider>
-    </BrowserRouter>
+    <div className="h-full w-full">
+      <Routers />
+    </div>
   );
 }
 

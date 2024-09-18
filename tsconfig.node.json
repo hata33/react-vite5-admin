@@ -6,5 +6,5 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src", "test", "types/**/*.ts", "**.ts", "*.json", "**.*js"]
+  "include": ["src", "test"]
 }

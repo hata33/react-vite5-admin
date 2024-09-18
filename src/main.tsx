@@ -1,12 +1,16 @@
+import { StyleProvider } from '@ant-design/cssinjs';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ConfigProvider } from 'antd';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'virtual:svg-icons-register';
 
 import App from '@/App';
 
-import '@/locales/i18n';
+import './locales/i18n';
+import { theme } from './theme/antd/theme';
+import './theme/index.css';
 
 // 创建一个 client
 const queryClient = new QueryClient({
@@ -26,7 +30,11 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     {/* 提供 client 至 App */}
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <App />
+      <ConfigProvider theme={theme}>
+        <StyleProvider hashPriority="high">
+          <App />
+        </StyleProvider>
+      </ConfigProvider>
     </QueryClientProvider>
   </React.StrictMode>,
 );

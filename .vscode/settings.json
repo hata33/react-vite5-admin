@@ -1,5 +1,6 @@
 {
   "cSpell.words": [
+    "signin",
     "stylelint",
     "tailwindcss"
   ],
@@ -7,8 +8,8 @@
   "editor.tabSize": 2,
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.fixAll.stylelint": true,
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
   },
   "stylelint.validate": [
     "css",

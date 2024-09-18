@@ -1,29 +1,24 @@
-import { Navigate, useRoutes } from 'react-router-dom';
+import {  createBrowserRouter, Navigate, RouteObject, RouterProvider } from 'react-router-dom';
 
 import Blog from '@/pages/Blog';
 import Dashboard from '@/pages/Dashboard';
 import Page404 from '@/pages/Page404';
 import Login from '@/pages/sys/login/Login';
-import ReactQuery from '@/pages/test/ReactQuery';
-import Zustand from '@/pages/test/Zustand';
 import User from '@/pages/User';
+
+import AuthenticatedRoute from './AuthenticatedRoute'
+import UnauthenticatedRoute from './UnauthenticatedRoute'
 export default function Router() {
-  const routes = useRoutes([
+  const routesForPublic: RouteObject[] = [];
+  const routesForAuthenticatedOnly: RouteObject[] = [
     {
       path: '/',
+      element:<AuthenticatedRoute />,
       children: [
         { element: <Navigate to="/dashboard" />, index: true },
         { path: 'user', element: <User /> },
         { path: 'dashboard', element: <Dashboard /> },
         { path: 'blog', element: <Blog /> },
-      ],
-    },
-    {
-      path: '/test',
-      children: [
-        { element: <Navigate to="/test/zustand" />, index: true },
-        { path: 'zustand', element: <Zustand /> },
-        { path: 'react-query', element: <ReactQuery /> },
       ],
     },
     {
@@ -34,6 +29,19 @@ export default function Router() {
       path: '*',
       element: <Page404 />,
     },
-  ]);
-  return routes;
+  ];
+  const routesForNotAuthenticateOnly: RouteObject[] = [
+    {
+      path: '/',
+      element: <UnauthenticatedRoute />,
+      children: [{ path: 'login', element: <Login />, index: true }],
+    }
+  ];
+  
+  const router = createBrowserRouter([
+    ...routesForPublic,
+    ...routesForNotAuthenticateOnly,
+    ...routesForAuthenticatedOnly
+  ])
+  return <RouterProvider router={router} />;
 }
