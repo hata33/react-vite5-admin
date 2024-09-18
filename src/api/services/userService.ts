@@ -7,15 +7,15 @@ export interface SignInReq{
 }
 export type SignInRes = UserToken & { user: UserInfo };
 
-enum Api{
+export enum UserApi{
   SignIn = '/auth/signin',
   SignUp = '/auth/signup',
   LouOut = '/auth/logout',
   Refresh = '/auth/refresh',
   User = '/user/',
 }
-const signin = (data: SignInReq) => apiClient.post<SignInRes>({ url: Api.SignIn, data });
-const findById = (id: string) => apiClient.get({ url: `${Api.User}${id}` });
+const signin = (data: SignInReq) => apiClient.post<SignInRes>({ url: UserApi.SignIn, data });
+const findById = (id: string) => apiClient.get({ url: `${UserApi.User}${id}` });
 export default {
   signin,
   findById,

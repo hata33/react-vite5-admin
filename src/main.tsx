@@ -8,6 +8,7 @@ import 'virtual:svg-icons-register';
 
 import App from '@/App';
 
+import worker from './_mock';
 import './locales/i18n';
 import { theme } from './theme/antd/theme';
 import './theme/index.css';
@@ -38,3 +39,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     </QueryClientProvider>
   </React.StrictMode>,
 );
+console.log(worker,'worker');
+// 🥵 start service worker mock in development mode
+worker.start({ onUnhandledRequest: 'bypass', security: false });
