@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { create } from 'zustand';
 
 import userService, { SignInReq } from '@/api/services/userService';
-import { getItem, setItem } from '@/utils/storage';
+import { getItem, removeItem, setItem } from '@/utils/storage';
 
 import { UserToken, UserInfo } from '#/entity';
 import { StorageEnum } from '#/enum';
@@ -14,6 +14,7 @@ type UserStore = {
   actions: {
     setUserInfo: (userInfo: UserInfo) => void;
     setUserToken: (token: UserToken) => void;
+    clearUserInfoAndToken: () => void;
   };
 };
 
@@ -28,6 +29,10 @@ const useUserStore = create<UserStore>((set) => ({
     setUserToken: (userToken) => {
       set({ userToken });
       setItem(StorageEnum.Token, userToken);
+    },
+    clearUserInfoAndToken: () => {
+      removeItem(StorageEnum.User);
+      removeItem(StorageEnum.Token);
     },
   },
 }));
@@ -46,9 +51,9 @@ export const useSignIn = () => {
     const { user, accessToken, refreshToken } = res;
     setUserToken({ accessToken, refreshToken });
     setUserInfo(user);
-    
+
     navigate('/dashboard', { replace: true });
     return res;
-  }
+  };
   return signIn;
-}
+};
