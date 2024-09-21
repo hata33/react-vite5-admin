@@ -2,33 +2,64 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { Menu, MenuProps } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { ItemType } from 'antd/es/menu/interface';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import Logo from '@/assets/icons/ic-logo.svg';
 import { SvgIcon } from '@/components/icon';
+import { getMenuRoutes } from '@/router/menus';
+
+import { AppRouteObject } from '#/router';
 
 type SidebarProps = {
   closeSideBarDrawer?: () => void;
 };
 function Sidebar(props: SidebarProps) {
-  const rootSubmenuKeys = ['management'];
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
+  // submenu keys of first level
+  const rootSubmenuKeys = ['management'];
+
+  // router -> menu
+  const routeToMenu = useCallback(
+    (items: AppRouteObject[], parentPath = '') => {
+      console.log('routeToMenu');
+      return items.map((item) => {
+        const menuItem: any = {
+          key: parentPath + (item.path!.startsWith('/') ? item.path : `/${item.path}`),
+        };
+        if (item.meta?.title) {
+          menuItem.label = t(item.meta?.title);
+        }
+        if (item.meta?.icon) {
+          menuItem.icon = <SvgIcon icon={item.meta?.icon} size="24" className="mr-6" />;
+        }
+        if (item.children) {
+          menuItem.children = routeToMenu(item.children, item.path);
+        }
+        return menuItem;
+      });
+    },
+    [t],
+  );
+
   const [openKeys, setOpenKeys] = useState(['dashboard']);
   const [selectedKeys, setSelectedKeys] = useState(['dashboard']);
   const [collapsed, setCollapsed] = useState(false);
+  const [menuList, setMenuList] = useState<ItemType[]>([]);
 
   useEffect(() => {
     setSelectedKeys([pathname]);
   }, [pathname, openKeys]);
 
   useEffect(() => {
-    setSelectedKeys([pathname]);
-  }, [pathname, openKeys]);
+    const menuRoutes = getMenuRoutes();
+    const menus = routeToMenu(menuRoutes);
+    setMenuList(menus);
+  }, [routeToMenu]);
 
   const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
@@ -43,30 +74,6 @@ function Sidebar(props: SidebarProps) {
     navigate(key);
   };
 
-  const menuList: ItemType[] = [
-    {
-      key: '/dashboard',
-      label: `${t('sys.menu.app')}`,
-      icon: <SvgIcon icon="ic-dashboard" size="24" className="mr-6" />,
-    },
-    {
-      key: 'management',
-      label: `${t('sys.menu.management')}`,
-      icon: <SvgIcon icon="ic-dashboard" size="24" className="mr-6" />,
-      children: [
-        {
-          key: '/user',
-          label: `${t('sys.menu.user')}`,
-          icon: <SvgIcon icon="ic-user" size="24" className="mr-6" />,
-        },
-        {
-          key: '/blog',
-          label: `${t('sys.menu.blog')}`,
-          icon: <SvgIcon icon="ic-blog" size="24" className="mr-6" />,
-        },
-      ],
-    },
-  ];
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
@@ -97,7 +104,7 @@ function Sidebar(props: SidebarProps) {
       </div>
       <button
         onClick={toggleCollapsed}
-        className="bg-white absolute right-0 top-0 z-10 hidden h-6 w-6 translate-x-1/2 cursor-pointer select-none rounded-full border-[1px] border-dashed border-[#919eab33] text-center lg:block"
+        className="absolute right-0 top-0 z-10 hidden h-6 w-6 translate-x-1/2 cursor-pointer select-none rounded-full border-[1px] border-dashed border-[#919eab33] bg-white text-center lg:block"
       >
         {collapsed ? <MenuUnfoldOutlined size={20} /> : <MenuFoldOutlined size={20} />}
       </button>

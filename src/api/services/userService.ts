@@ -20,11 +20,13 @@ export enum UserApi {
   User = '/user/',
 }
 const signin = (data: SignInReq) => apiClient.post<SignInRes>({ url: UserApi.SignIn, data });
+const signup = (data: SignUpReq) => apiClient.post<SignInRes>({ url: UserApi.SignUp, data });
 const logout = () => apiClient.get({ url: UserApi.Logout });
 
 const findById = (id: string) => apiClient.get({ url: `${UserApi.User}${id}` });
 export default {
   signin,
+  signup,
   logout,
   findById,
 };
