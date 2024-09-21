@@ -1,4 +1,6 @@
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { Menu, MenuProps } from 'antd';
+import Sider from 'antd/es/layout/Sider';
 import { ItemType } from 'antd/es/menu/interface';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -18,6 +20,11 @@ function Sidebar(props: SidebarProps) {
 
   const [openKeys, setOpenKeys] = useState(['dashboard']);
   const [selectedKeys, setSelectedKeys] = useState(['dashboard']);
+  const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    setSelectedKeys([pathname]);
+  }, [pathname, openKeys]);
 
   useEffect(() => {
     setSelectedKeys([pathname]);
@@ -38,56 +45,63 @@ function Sidebar(props: SidebarProps) {
 
   const menuList: ItemType[] = [
     {
-      key: 'overview',
-      label: `${t('sys.menu.overview')}`,
-      children: [
-        {
-          key: '/dashboard',
-          label: `${t('sys.menu.app')}`,
-          icon: <SvgIcon icon="ic-dashboard" size="24" className="mr-4" />,
-        },
-        {
-          key: '/analytics',
-          label: `${t('sys.menu.analytics')}`,
-          icon: <SvgIcon icon="ic-analytics" size="24" className="mr-4" />,
-        },
-      ],
+      key: '/dashboard',
+      label: `${t('sys.menu.app')}`,
+      icon: <SvgIcon icon="ic-dashboard" size="24" className="mr-6" />,
     },
     {
       key: 'management',
       label: `${t('sys.menu.management')}`,
+      icon: <SvgIcon icon="ic-dashboard" size="24" className="mr-6" />,
       children: [
         {
           key: '/user',
           label: `${t('sys.menu.user')}`,
-          icon: <SvgIcon icon="ic-user" size="24" className="mr-4" />,
+          icon: <SvgIcon icon="ic-user" size="24" className="mr-6" />,
         },
         {
           key: '/blog',
           label: `${t('sys.menu.blog')}`,
-          icon: <SvgIcon icon="ic-blog" size="24" className="mr-4" />,
+          icon: <SvgIcon icon="ic-blog" size="24" className="mr-6" />,
         },
       ],
     },
   ];
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
 
   return (
-    <div className="h-screen w-64 border-r-[1px] border-dashed border-r-[#919eab33] duration-300 ease-linear">
+    <Sider
+      trigger={null}
+      collapsible
+      collapsed={collapsed}
+      collapsedWidth={90}
+      className="relative h-screen w-64 duration-300 ease-linear"
+    >
       <NavLink to="/">
         <img src={Logo} alt="" className="mb-2 ml-8 mt-6 h-10 w-10" />
       </NavLink>
-      <div className="p1-4">
+      <div className="p1-2">
         <Menu
           mode="inline"
           items={menuList}
           className="!border-none"
           defaultOpenKeys={openKeys}
+          defaultSelectedKeys={selectedKeys}
           selectedKeys={selectedKeys}
+          openKeys={openKeys}
           onOpenChange={onOpenChange}
           onClick={onClick}
         />
       </div>
-    </div>
+      <button
+        onClick={toggleCollapsed}
+        className="bg-white absolute right-0 top-0 z-10 hidden h-6 w-6 translate-x-1/2 cursor-pointer select-none rounded-full border-[1px] border-dashed border-[#919eab33] text-center lg:block"
+      >
+        {collapsed ? <MenuUnfoldOutlined size={20} /> : <MenuFoldOutlined size={20} />}
+      </button>
+    </Sider>
   );
 }
 export default Sidebar;

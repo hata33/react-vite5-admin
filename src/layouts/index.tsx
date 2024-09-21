@@ -7,7 +7,7 @@ function BasicLayout() {
   return (
     <div>
       <div className="flex h-screen overflow-hidden">
-        <div className="hidden lg:block">
+        <div className="hidden border-r-[1px] border-dashed border-r-[#919eab33] lg:block">
           <SiderBar />
         </div>
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
