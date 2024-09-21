@@ -8,9 +8,18 @@ import QrCodeFrom from './QrCodeForm';
 import RegisterForm from './RegisterForm';
 import ResetForm from './ResetForm';
 import { LoginStateProvider } from './providers/LoginStateProvider';
+import { useUserToken } from '@/store/userStore';
+import { Navigate } from 'react-router-dom';
 
 function Login() {
   const { t } = useTranslation();
+  const token = useUserToken();
+
+  // 判断用户是否有权限
+  if (token.accessToken) {
+    // 如果有授权，则跳转到首页
+    return <Navigate to="/dashboard" replace />;
+  }
   return (
     <main className="relative flex min-h-screen flex-row">
       <div

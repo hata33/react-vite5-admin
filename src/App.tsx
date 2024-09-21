@@ -1,10 +1,6 @@
-import Routers from './router';
-function App() {
-  return (
-    <div className="h-full w-full">
-      <Routers />
-    </div>
-  );
+import Routes from './router';
+function App() { 
+   return <Routes />
 }
 
 export default App;

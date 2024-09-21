@@ -6,12 +6,12 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     screens: {
-      xs: '400px',
-      sm: '640px',
+      xs: '480px',
+      sm: '576px',
       md: '768px',
-      lg: '1024px',
-      xl: '1280px',
-      '2xl': '1536px',
+      lg: '992px',
+      xl: '1200px',
+      '2xl': '1600px',
     },
     fontFamily: {
       sans: ['Public Sans', 'sans-serif'],
@@ -25,8 +25,29 @@ export default {
       orange: '#ff7849',
       yellow: '#ffc82c',
       gray: '#637381',
+
+      hover: '#63738114',
+      'gray-100': '#F9FAFB',
+      'gray-200': '#F4F6F8',
+      'gray-300': '#DFE3E8',
+      'gray-400': '#C4CDD5',
+      'gray-500': '#F9FAFB',
+      'gray-600': '#637381',
+      'gray-700': '#454F5B',
+      'gray-800': '#212B36',
+      'gray-900': '#161C24',
+
+      primary: '#00A76F',
+      'primary-lighter': '#C8FAD6',
+      'primary-light': '#5BE49B',
+      'primary-dark': '#007867',
+      'primary-darker': '#004B50',
     },
-    extend: {},
+    extend: {
+      transitionProperty: {
+        height: 'height',
+      },
+    },
   },
   // corePlugins: {
   //   preflight: false,
