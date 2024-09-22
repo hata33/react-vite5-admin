@@ -7,6 +7,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import userService from '@/api/services/userService';
 import { useLoginStateContext } from '@/pages/sys/login/providers/LoginStateProvider';
 import { useUserInfo, useUserActions } from '@/store/userStore';
+import { useTranslation } from 'react-i18next';
 
 const { useToken } = theme;
 
@@ -18,11 +19,12 @@ function UserSetting() {
   const logoutMutation = useMutation(userService.logout);
   const { backToLogin } = useLoginStateContext();
 
+  const { t } = useTranslation();
   const logout = () => {
     try {
       // logoutMutation.mutateAsync();
       clearUserInfoAndToken();
-      // backToLogin();
+      backToLogin();
     } catch (error) {
       console.error(error);
     } finally {
@@ -52,14 +54,11 @@ function UserSetting() {
   );
 
   const items: MenuProps['items'] = [
-    { label: <NavLink to="/dashboard">Home</NavLink>, key: '0' },
-    { label: <NavLink to="/dashboard">Profile</NavLink>, key: '1' },
-    { label: <NavLink to="/dashboard">Settings</NavLink>, key: '2' },
     { type: 'divider' },
     {
       label: (
         <button onClick={logout} className="font-bold text-orange">
-          Logout
+          {t('sys.login.logout')}
         </button>
       ),
       key: '3',
