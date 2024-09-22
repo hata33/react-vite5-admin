@@ -9,7 +9,6 @@ import App from '@/App';
 
 import worker from './_mock';
 import './locales/i18n';
-import { theme } from './theme/antd/theme';
 import './theme/index.css';
 
 // 创建一个 client
@@ -30,11 +29,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <QueryClientProvider client={queryClient}>
     <ReactQueryDevtools initialIsOpen={false} />
-    <ConfigProvider theme={theme}>
-      <StyleProvider hashPriority="high">
-        <App />
-      </StyleProvider>
-    </ConfigProvider>
+    <App />
   </QueryClientProvider>,
 );
 
