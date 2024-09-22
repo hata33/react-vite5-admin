@@ -15,7 +15,6 @@ import { Navigate } from 'react-router-dom';
 function Login() {
   const { t } = useTranslation();
   const token = useUserToken();
-
   // 判断用户是否有权限
   if (token.accessToken) {
     // 如果有授权，则跳转到首页

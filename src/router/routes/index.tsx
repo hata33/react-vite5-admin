@@ -12,10 +12,8 @@ const Login = lazy(() => import('@/pages/sys/login/Login'));
 const modules = import.meta.glob('./modules/**/*.tsx', { eager: true });
 const routeModuleList: AppRouteObject[] = [];
 
-console.log(modules, 'modules');
 // 加入到路由集合中
 Object.keys(modules).forEach((key) => {
-  console.log(key, 'key');
   const mod = (modules as any)[key].default || {};
   const modList = Array.isArray(mod) ? [...mod] : [mod];
   routeModuleList.push(...modList);
@@ -41,4 +39,4 @@ export const PageNotFoundRoute: AppRouteObject = { path: '*', element: <Page404 
 // Basic routing without permission
 export const basicRoutes = [LoginRoute, RootRoute, PageNotFoundRoute];
 
-export const asyncRoutes = [RootRoute, PageNotFoundRoute];
+export const asyncRoutes = [RootRoute, PageNotFoundRoute, LoginRoute];
