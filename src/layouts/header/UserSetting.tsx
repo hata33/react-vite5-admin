@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Divider, MenuProps, theme } from 'antd';
 import Dropdown, { DropdownProps } from 'antd/es/dropdown/dropdown';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import userService from '@/api/services/userService';
 import { useLoginStateContext } from '@/pages/sys/login/providers/LoginStateProvider';
@@ -11,6 +11,7 @@ import { useUserInfo, useUserActions } from '@/store/userStore';
 const { useToken } = theme;
 
 function UserSetting() {
+  const navigate = useNavigate();
   const { token } = useToken();
   const { username, email } = useUserInfo();
   const { clearUserInfoAndToken } = useUserActions();
@@ -19,12 +20,14 @@ function UserSetting() {
 
   const logout = () => {
     try {
-      logoutMutation.mutateAsync();
+      // logoutMutation.mutateAsync();
+      clearUserInfoAndToken();
+      // backToLogin();
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    } finally {
+      navigate('/login');
     }
-    clearUserInfoAndToken();
-    backToLogin();
   };
 
   const contentStyle: React.CSSProperties = {

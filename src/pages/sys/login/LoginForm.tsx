@@ -30,12 +30,15 @@ function LoginForm() {
   return (
     <>
       <div className="mb-4 text-2xl font-bold xl:text-3xl">{t('sys.login.signInFormTitle')}</div>
-      <Form name="login" size="large" initialValues={{ remember: true }} onFinish={handleFinish}>
+      <Form
+        name="login"
+        size="large"
+        initialValues={{ username: 'test', password: 'demo1234', remember: true }}
+        onFinish={handleFinish}
+      >
         <div className="mb-4 flex flex-col">
           <Alert
-            description={`${t('sys.login.userName')}: demo@minimals.cc / ${t(
-              'sys.login.password',
-            )}: demo1234`}
+            description={`${t('sys.login.userName')}: test / ${t('sys.login.password')}: demo1234`}
             type="info"
             showIcon
           />

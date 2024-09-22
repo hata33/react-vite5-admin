@@ -72,12 +72,63 @@
       "privacyPolicy": " 隐私政策 "
     },
     "menu": {
-      "overview": "概览",
-      "app": "应用",
-      "analytics": "分析",
+      "dashboard": "仪表",
+      "workbench": "工作台",
+      "analysis": "分析",
       "management": "管理",
-      "user": "用户",
-      "blog": "博客"
+      "user": {
+        "index": "用户",
+        "profile": "个人资料",
+        "account": "账户"
+      },
+      "system": {
+        "index": "系统",
+        "organization": "组织",
+        "permission": "权限",
+        "role": "角色",
+        "user": "用户",
+        "user_detail": "用户详情"
+      },
+      "blog": "博客",
+      "components": "组件",
+      "icon": "图标",
+      "animate": "动画",
+      "scroll": "滚动",
+      "markdown": "Markdown",
+      "editor": "富文本",
+      "i18n": "多语言",
+      "upload": "上传",
+      "chart": "图表",
+      "functions": "功能",
+      "clipboard": "剪贴板",
+      "token_expired": "Token失效",
+      "menulevel": {
+        "index": "多级菜单",
+        "1a": "多级菜单 1a",
+        "1b": {
+          "index": "多级菜单 1b",
+          "2a": "多级菜单 2a",
+          "2b": {
+            "index": "多级菜单 2b",
+            "3a": "多级菜单 3a",
+            "3b": "多级菜单 3b"
+          }
+        }
+      },
+      "disabled": "项目禁用",
+      "label": "项目标签",
+      "frame": "项目外部链接",
+      "external_link": "外链",
+      "iframe": "内嵌",
+      "blank": "空白",
+      "calendar": "日历",
+      "kanban": "看板",
+      "error": {
+        "index": "异常页",
+        "403": "403",
+        "404": "404",
+        "500": "500"
+      }
     }
   }
 }
