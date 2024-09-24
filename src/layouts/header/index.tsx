@@ -4,14 +4,19 @@ import { CSSProperties, useState } from 'react';
 import CyanBlur from '@/assets/images/background/cyan-blur.png';
 import RedBlur from '@/assets/images/background/red-blur.png';
 import { AppLocalePicker } from '@/components/app';
+import Logo from '@/components/app/Logo';
 import { SvgIcon } from '@/components/icon';
+import { useSettings } from '@/store/settingStore';
 
 import Sidebar from '../sidebar';
 import Settings from './Settings';
 import UserAvatar from './UserAvatar';
 
+import { ThemeLayout } from '#/enum';
+
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { themeLayout } = useSettings();
 
   const style: CSSProperties = {
     backdropFilter: 'blur(20px)',
@@ -28,12 +33,16 @@ function Header() {
       <header className="sticky top-0 w-full">
         <div className="shadow-2 text-gary flex flex-grow items-center justify-between px-4 py-4 md:px-6 2xl:px-11">
           <div className="flex items-center">
-            <button
-              onClick={() => setDrawerOpen(true)}
-              className="cursor-point flex h-9 w-9 items-center justify-center rounded-full hover:bg-hover lg:hidden"
-            >
-              <SvgIcon icon="ic-menu" size="24" />
-            </button>
+            {themeLayout !== ThemeLayout.Horizontal ? (
+              <button
+                onClick={() => setDrawerOpen(true)}
+                className="cursor-point flex h-9 w-9 items-center justify-center rounded-full hover:bg-hover lg:hidden"
+              >
+                <SvgIcon icon="ic-menu" size="24" />
+              </button>
+            ) : (
+              <Logo className="mr-4 h-10 w-10" />
+            )}
 
             <button className="cursor-point flex h-9 w-9 items-center justify-center rounded-full hover:bg-hover lg:hidden">
               <SvgIcon icon="ic-search" size="24" />

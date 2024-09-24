@@ -4,12 +4,14 @@ import Sider from 'antd/es/layout/Sider';
 import { ItemType } from 'antd/es/menu/interface';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink, useLocation, useMatches, useNavigate } from 'react-router-dom';
+import { useLocation, useMatches, useNavigate } from 'react-router-dom';
 
-import Logo from '@/assets/icons/ic-logo.svg';
+import Logo from '@/components/app/Logo';
 import { SvgIcon } from '@/components/icon';
 import { getMenuRoutes } from '@/router/menus';
+import { useSettingActions, useSettings } from '@/store/settingStore';
 
+import { ThemeLayout } from '#/enum';
 import { AppRouteObject } from '#/router';
 
 type SidebarProps = {
@@ -23,8 +25,13 @@ function Sidebar(props: SidebarProps) {
   const { t } = useTranslation();
 
   const {
-    token: { colorTextBase, colorPrimary },
+    token: { colorTextBase },
   } = theme.useToken();
+
+  const settings = useSettings();
+  const { themeLayout } = settings;
+  const { setSettings } = useSettingActions();
+
   // router -> menu
   const routeToMenu = useCallback(
     (items: AppRouteObject[]) => {
@@ -52,6 +59,7 @@ function Sidebar(props: SidebarProps) {
   const [selectedKeys, setSelectedKeys] = useState(['dashboard']);
   const [collapsed, setCollapsed] = useState(false);
   const [menuList, setMenuList] = useState<ItemType[]>([]);
+  const [menuMode, setMenuMode] = useState<MenuProps['mode']>('inline');
 
   useEffect(() => {
     const openKeys = matches
@@ -67,6 +75,16 @@ function Sidebar(props: SidebarProps) {
     setMenuList(menus);
   }, [routeToMenu]);
 
+  useEffect(() => {
+    if (themeLayout === ThemeLayout.Vertical) {
+      setCollapsed(false);
+      setMenuMode('inline');
+    }
+    if (themeLayout === ThemeLayout.Mini) {
+      setCollapsed(true);
+      setMenuMode('inline');
+    }
+  }, [themeLayout]);
   const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
     if (latestOpenKey) {
@@ -80,7 +98,19 @@ function Sidebar(props: SidebarProps) {
     navigate(key);
   };
 
+  const setThemeLayout = (themeLayout: ThemeLayout) => {
+    setSettings({
+      ...settings,
+      themeLayout,
+    });
+  };
+
   const toggleCollapsed = () => {
+    if (!collapsed) {
+      setThemeLayout(ThemeLayout.Mini);
+    } else {
+      setThemeLayout(ThemeLayout.Vertical);
+    }
     setCollapsed(!collapsed);
   };
 
@@ -93,11 +123,9 @@ function Sidebar(props: SidebarProps) {
       className="relative h-screen duration-300 ease-linear"
     >
       <div className="h-screen">
-        <NavLink to="/">
-          <img src={Logo} alt="" className="mb-2 ml-8 mt-6 h-10 w-10" />
-        </NavLink>
+        <Logo className="mb-2 ml-8 mt-6 h-10 w-10" />
         <Menu
-          mode="inline"
+          mode={menuMode}
           items={menuList}
           className="h-full !border-none"
           defaultOpenKeys={openKeys}
