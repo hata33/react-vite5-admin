@@ -37,6 +37,6 @@ export const LoginRoute: AppRouteObject = { path: '/login', element: <Login /> }
 // 404
 export const PageNotFoundRoute: AppRouteObject = { path: '*', element: <Page404 /> };
 // Basic routing without permission
-export const basicRoutes = [LoginRoute, RootRoute, PageNotFoundRoute];
+export const basicRoutes = [RootRoute, PageNotFoundRoute, LoginRoute];
 
 export const asyncRoutes = [RootRoute, PageNotFoundRoute, LoginRoute];
