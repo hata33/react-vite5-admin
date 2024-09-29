@@ -29,7 +29,7 @@ export enum ThemeLayout {
 
 export enum ThemeColorPresets {
   Default = 'default',
-  Cyan = 'cyan',
+  Green = 'green',
   Purple = 'purple',
   Blue = 'blue',
   Orange = 'orange',
