@@ -17,11 +17,11 @@ function ProHeader() {
   const { themeLayout } = useSettings();
 
   const {
-    token: { colorBgBase },
+    token: { colorBgElevated },
   } = theme.useToken();
   return (
     <>
-      <header className="sticky top-0 h-20 w-full" style={{ background: colorBgBase }}>
+      <header className="sticky top-0 h-20 w-full" style={{ background: colorBgElevated }}>
         <div className="shadow-2 text-gary flex flex-grow items-center justify-between px-4 py-4 md:px-6 2xl:px-11">
           <div className="flex items-center">
             {themeLayout !== ThemeLayout.Horizontal ? (

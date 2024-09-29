@@ -2,7 +2,7 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { Menu, MenuProps, theme } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { ItemType } from 'antd/es/menu/interface';
-import { useCallback, useEffect, useState } from 'react';
+import { CSSProperties, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useMatches, useNavigate } from 'react-router-dom';
 
@@ -25,13 +25,16 @@ function ProSider(props: SidebarProps) {
   const { t } = useTranslation();
 
   const {
-    token: { colorTextBase, colorPrimary },
+    token: { colorTextBase, colorPrimary, colorBgElevated },
   } = theme.useToken();
 
   const settings = useSettings();
   const { themeLayout } = settings;
   const { setSettings } = useSettingActions();
 
+  const menuStyle: CSSProperties = {
+    background: colorBgElevated,
+  };
   // router -> menu
   const routeToMenu = useCallback(
     (items: AppRouteObject[]) => {
@@ -122,7 +125,7 @@ function ProSider(props: SidebarProps) {
         <Logo className="h-10 w-10" />
         {themeLayout !== ThemeLayout.Mini ? (
           <h1 className="ml-2 text-base font-semibold" style={{ color: colorPrimary }}>
-            Hata Admin
+            Hataa Admin
           </h1>
         ) : null}
         <button
@@ -137,7 +140,7 @@ function ProSider(props: SidebarProps) {
         trigger={null}
         collapsible
         collapsed={collapsed}
-        collapsedWidth={90}
+        collapsedWidth={100}
         className="duration-300 ease-linear"
       >
         <Menu
@@ -150,6 +153,7 @@ function ProSider(props: SidebarProps) {
           openKeys={openKeys}
           onOpenChange={onOpenChange}
           onClick={onClick}
+          style={menuStyle}
         />
       </Sider>
     </>

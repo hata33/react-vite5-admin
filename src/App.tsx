@@ -17,7 +17,13 @@ function App() {
   const colorPrimary = colorPrimarys[themeColorPresets];
 
   return (
-    <ConfigProvider theme={{ token: { ...customAntdTheme.token, colorPrimary }, algorithm }}>
+    <ConfigProvider
+      theme={{
+        token: { ...customAntdTheme.token, colorPrimary },
+        components: { ...customAntdTheme.components },
+        algorithm,
+      }}
+    >
       <StyleProvider hashPriority="high">
         <RouterProvider router={router} />
       </StyleProvider>
