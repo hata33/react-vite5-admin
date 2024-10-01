@@ -29,7 +29,7 @@ export const ORG_LIST = [
       { id: '2-2', name: 'Marketing Department', status: 'enable', desc: '', order: 2 },
       { id: '2-3', name: 'Finance Department', status: 'enable', desc: '', order: 3 },
     ],
-  }
+  },
 ];
 
 /**
@@ -520,10 +520,11 @@ export const TEST_USER = {
   id: 'efaa20ea-4dc5-47ee-a200-8a899be29494',
   username: 'test',
   password: 'demo1234',
-  email: faker.internet.email(),
+  email: 'test123456@qq.com',
+  username: 'test',
   avatar: faker.image.avatarLegacy(),
-  createdAt: faker.date.anytime(),
-  updatedAt: faker.date.recent(),
+  createdAt: '2024-09-28T00:21:42.270Z',
+  updatedAt: '2024-09-28T03:49:46.000Z',
   role: TEST_ROLE,
   permissions: TEST_ROLE.permission,
 };

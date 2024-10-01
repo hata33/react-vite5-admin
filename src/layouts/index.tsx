@@ -2,7 +2,6 @@ import { Layout, theme } from 'antd';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { Progress } from '@/components/app';
 import { useSettings } from '@/store/settingStore';
 
 import ProContent from './content';
@@ -11,29 +10,17 @@ import ProSider from './sidebar';
 import TopMenu from './sidebar/TopMenu';
 
 import { ThemeLayout } from '#/enum';
+import ProgressBar from '@/components/app/progress-bar';
 function BasicLayout() {
-  const [isLoading, setIsLoading] = useState(false);
-  const { pathname } = useLocation();
   const {
     token: { colorBgElevated, colorTextBase },
   } = theme.useToken();
 
   const { themeLayout } = useSettings();
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 50);
-    return () => setIsLoading(true);
-  }, [pathname]);
-
-  useEffect(() => {
-    setIsLoading(true);
-  }, []);
-
   return (
     <>
-      <Progress isAnimating={isLoading} />
+      <ProgressBar />
       <Layout className="flex h-screen overflow-hidden">
         {themeLayout !== ThemeLayout.Horizontal ? (
           <div

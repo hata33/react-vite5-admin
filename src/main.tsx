@@ -1,7 +1,6 @@
-import { StyleProvider } from '@ant-design/cssinjs';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { ConfigProvider } from 'antd';
+import { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import 'virtual:svg-icons-register';
 
@@ -29,7 +28,9 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <QueryClientProvider client={queryClient}>
     <ReactQueryDevtools initialIsOpen={false} />
-    <App />
+    <Suspense>
+      <App />
+    </Suspense>
   </QueryClientProvider>,
 );
 
