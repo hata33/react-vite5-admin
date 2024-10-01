@@ -1,7 +1,9 @@
 import { useTranslation } from 'react-i18next';
+import { Navigate } from 'react-router-dom';
 
-import { AppLocalePicker } from '@/components/app';
+import LocalePicker from '@/components/locale-picker';
 import DashboardImg from '@/assets/images/background/dashboard.png';
+import { useUserToken } from '@/store/userStore';
 
 import LoginForm from './LoginForm';
 import MobileForm from './MobileForm';
@@ -9,8 +11,6 @@ import QrCodeFrom from './QrCodeForm';
 import RegisterForm from './RegisterForm';
 import ResetForm from './ResetForm';
 import { LoginStateProvider } from './providers/LoginStateProvider';
-import { useUserToken } from '@/store/userStore';
-import { Navigate } from 'react-router-dom';
 
 function Login() {
   const { t } = useTranslation();
@@ -47,7 +47,7 @@ function Login() {
       </div>
 
       <div className="absolute right-0 top-0">
-        <AppLocalePicker />
+        <LocalePicker />
       </div>
     </main>
   );

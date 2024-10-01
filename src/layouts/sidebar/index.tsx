@@ -6,7 +6,7 @@ import { CSSProperties, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useMatches, useNavigate } from 'react-router-dom';
 
-import Logo from '@/components/app/Logo';
+import Logo from '@/components/logo';
 import { SvgIcon } from '@/components/icon';
 import { getMenuRoutes } from '@/router/menus';
 import { useSettingActions, useSettings } from '@/store/settingStore';
@@ -125,7 +125,7 @@ function ProSider(props: SidebarProps) {
         <Logo className="h-10 w-10" />
         {themeLayout !== ThemeLayout.Mini ? (
           <h1 className="ml-2 text-base font-semibold" style={{ color: colorPrimary }}>
-            Hataa Admin
+            Hata Admin
           </h1>
         ) : null}
         <button

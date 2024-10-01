@@ -1,8 +1,8 @@
 import { Drawer, theme } from 'antd';
 import { useState } from 'react';
 
-import { AppLocalePicker } from '@/components/app';
-import Logo from '@/components/app/Logo';
+import LocalePicker from '@/components/locale-picker';
+import Logo from '@/components/logo';
 import { SvgIcon } from '@/components/icon';
 import { useSettings } from '@/store/settingStore';
 
@@ -44,7 +44,7 @@ function ProHeader() {
           </div>
 
           <div className="flex">
-            <AppLocalePicker />
+            <LocalePicker />
             <Settings />
             <UserAvatar />
           </div>

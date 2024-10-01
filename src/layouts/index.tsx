@@ -10,7 +10,7 @@ import ProSider from './sidebar';
 import TopMenu from './sidebar/TopMenu';
 
 import { ThemeLayout } from '#/enum';
-import ProgressBar from '@/components/app/progress-bar';
+import ProgressBar from '@/components/progress-bar';
 function BasicLayout() {
   const {
     token: { colorBgElevated, colorTextBase },

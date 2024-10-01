@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react';
 
-import Loading from '@/components/app/Loading';
+import Loading from '@/components/loading/loading';
 
 import { AppRouteObject } from '#/router';
 
