@@ -26,15 +26,13 @@ export default function SvgIcon({
     ...style,
   };
   return (
-    <div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 100 100"
-        className={`fill-current inline-block h-[1em] w-[1em] overflow-hidden outline-none ${className}`}
-        style={svgStyle}
-      >
-        <use xlinkHref={symbolId} fill="currentColor" />
-      </svg>
-    </div>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 100 100"
+      className={`fill-current inline-block h-[1em] w-[1em] overflow-hidden outline-none ${className}`}
+      style={svgStyle}
+    >
+      <use xlinkHref={symbolId} fill="currentColor" />
+    </svg>
   );
 }
