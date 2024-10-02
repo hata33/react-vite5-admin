@@ -1,6 +1,6 @@
 import { Typography } from 'antd';
 import { m } from 'framer-motion';
-// import { Helmet } from 'react-helmet-async';
+import { Helmet } from 'react-helmet-async';
 import { NavLink } from 'react-router-dom';
 
 import Character6 from '@/assets/images/characters/character_6.png';
@@ -21,9 +21,9 @@ export default function Page404() {
   } = useThemeToken();
   return (
     <>
-      {/* <Helmet>
+      <Helmet>
         <title> 404 Page Not Found!</title>
-      </Helmet> */}
+      </Helmet>
 
       <div className="m-auto max-w-[400px]">
         <MotionContainer className="flex flex-col items-center justify-center px-2">
