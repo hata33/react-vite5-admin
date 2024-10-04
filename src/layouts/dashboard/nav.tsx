@@ -1,32 +1,30 @@
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
-import { Menu, MenuProps, theme } from 'antd';
+import { Menu, MenuProps } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { ItemType } from 'antd/es/menu/interface';
 import { CSSProperties, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useMatches, useNavigate } from 'react-router-dom';
 
-import Logo from '@/components/logo';
 import { SvgIcon } from '@/components/icon';
+import Logo from '@/components/logo';
 import { getMenuRoutes } from '@/router/menus';
 import { useSettingActions, useSettings } from '@/store/settingStore';
+import { useThemeToken } from '@/theme/hooks';
 
 import { ThemeLayout } from '#/enum';
 import { AppRouteObject } from '#/router';
 
-type SidebarProps = {
+type Props = {
   closeSideBarDrawer?: () => void;
 };
-function ProSider(props: SidebarProps) {
+export default function Nav(props: Props) {
   const navigate = useNavigate();
   const matches = useMatches();
   const { pathname } = useLocation();
-
   const { t } = useTranslation();
 
-  const {
-    token: { colorTextBase, colorPrimary, colorBgElevated },
-  } = theme.useToken();
+  const { colorTextBase, colorPrimary, colorBgElevated } = useThemeToken();
 
   const settings = useSettings();
   const { themeLayout } = settings;
@@ -44,23 +42,25 @@ function ProSider(props: SidebarProps) {
         if (meta) {
           menuItem.key = meta.key;
           menuItem.label = t(meta?.title);
-
           if (meta.icon) {
             menuItem.icon = <SvgIcon icon={meta.icon} className="ant-menu-item-icon" size="20" />;
           }
-          if (children) {
-            menuItem.children = routeToMenu(children);
-          }
-          return menuItem;
         }
+        if (children) {
+          menuItem.children = routeToMenu(children);
+        }
+        return menuItem;
       });
     },
     [t],
   );
 
-  const [openKeys, setOpenKeys] = useState(['dashboard']);
-  const [selectedKeys, setSelectedKeys] = useState(['dashboard']);
+  /**
+   * state
+   */
   const [collapsed, setCollapsed] = useState(false);
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
+  const [selectedKeys, setSelectedKeys] = useState<string[]>(['']);
   const [menuList, setMenuList] = useState<ItemType[]>([]);
   const [menuMode, setMenuMode] = useState<MenuProps['mode']>('inline');
 
@@ -90,17 +90,21 @@ function ProSider(props: SidebarProps) {
       setMenuMode('inline');
     }
   }, [themeLayout]);
+
+  /**
+   * events
+   */
   const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
     if (latestOpenKey) {
-      setOpenKeys(keys);
+      setOpenKeys([latestOpenKey]);
     } else {
       setOpenKeys([]);
     }
   };
-
   const onClick: MenuProps['onClick'] = ({ key }) => {
     navigate(key);
+    props?.closeSideBarDrawer?.();
   };
 
   const setThemeLayout = (themeLayout: ThemeLayout) => {
@@ -125,9 +129,9 @@ function ProSider(props: SidebarProps) {
         <Logo className="h-10 w-10" />
         {themeLayout !== ThemeLayout.Mini ? (
           <h1 className="ml-2 text-base font-semibold" style={{ color: colorPrimary }}>
-            Hata Admin
+            Slash Admin
           </h1>
-        ) : null}
+        ) : null}{' '}
         <button
           onClick={toggleCollapsed}
           className="absolute right-0 top-6 z-10 hidden h-6 w-6 translate-x-1/2 cursor-pointer select-none rounded-full text-center !text-gray lg:block"
@@ -143,20 +147,25 @@ function ProSider(props: SidebarProps) {
         collapsedWidth={100}
         className="duration-300 ease-linear"
       >
-        <Menu
-          mode={menuMode}
-          items={menuList}
-          className="!border-none"
-          defaultOpenKeys={openKeys}
-          defaultSelectedKeys={selectedKeys}
-          selectedKeys={selectedKeys}
-          openKeys={openKeys}
-          onOpenChange={onOpenChange}
-          onClick={onClick}
-          style={menuStyle}
-        />
+        {/* hidden when screen < lg */}
+
+        <div className="h-full">
+          {/* <!-- Sidebar Menu --> */}
+          <Menu
+            mode={menuMode}
+            items={menuList}
+            className="!border-none"
+            defaultOpenKeys={openKeys}
+            defaultSelectedKeys={selectedKeys}
+            selectedKeys={selectedKeys}
+            openKeys={openKeys}
+            onOpenChange={onOpenChange}
+            onClick={onClick}
+            style={menuStyle}
+          />
+          {/* <!-- Sidebar Menu --> */}
+        </div>
       </Sider>
     </>
   );
 }
-export default ProSider;

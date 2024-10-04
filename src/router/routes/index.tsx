@@ -1,23 +1,18 @@
-import { lazy } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
+
+import SimpleLayout from '@/layouts/simple';
 
 import AuthRouter from '../components/AuthRouter';
 
 import { AppRouteObject } from '#/router';
 
-const Page404 = lazy(() => import('@/pages/sys/error/Page404'));
+const Page404 = lazy(() => import('@/pages/Page404'));
 const Login = lazy(() => import('@/pages/sys/login/Login'));
 
 // 基于 src/router/routes/modules 文件结构动态生成路由
 const modules = import.meta.glob('./modules/**/*.tsx', { eager: true });
 const routeModuleList: AppRouteObject[] = [];
-
-// 加入到路由集合中
-Object.keys(modules).forEach((key) => {
-  const mod = (modules as any)[key].default || {};
-  const modList = Array.isArray(mod) ? [...mod] : [mod];
-  routeModuleList.push(...modList);
-});
 
 // 加入到路由集合中
 Object.keys(modules).forEach((key) => {
@@ -34,9 +29,21 @@ export const RootRoute: AppRouteObject = {
 };
 // login
 export const LoginRoute: AppRouteObject = { path: '/login', element: <Login /> };
-// 404
-export const PageNotFoundRoute: AppRouteObject = { path: '*', element: <Page404 /> };
+// error
+export const ErrorRoute: AppRouteObject = {
+  element: (
+    <SimpleLayout>
+      <Suspense>
+        <Outlet />
+      </Suspense>
+    </SimpleLayout>
+  ),
+  children: [{ path: '404', element: <Page404 /> }],
+};
 // Basic routing without permission
-export const basicRoutes = [RootRoute, PageNotFoundRoute, LoginRoute];
-
-export const asyncRoutes = [RootRoute, PageNotFoundRoute, LoginRoute];
+export const asyncRoutes = [
+  LoginRoute,
+  RootRoute,
+  ErrorRoute,
+  { path: '*', element: <Navigate to="/404" replace /> },
+];

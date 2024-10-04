@@ -11,7 +11,7 @@ import { AppRouteObject, RouteMeta } from '#/router';
 /**
  * 动态面包屑解决方案：https://github.com/MinjieChang/myblog/issues/29
  */
-function BreadCrumb() {
+export default function BreadCrumb() {
   const { t } = useTranslation();
   const matches = useMatches();
 
@@ -23,10 +23,12 @@ function BreadCrumb() {
       <div className="!h-1 !w-1 rounded-full bg-gray" />
     </div>
   );
-
-  const flattenRoutes = useCallback((routers: AppRouteObject[]) => {
-    return routers.reduce<RouteMeta[]>((prev, current) => {
-      const { meta, children } = current;
+  /**
+   * flatten the routes
+   */
+  const flattenRoutes = useCallback((routes: AppRouteObject[]) => {
+    return routes.reduce<RouteMeta[]>((prev, item) => {
+      const { meta, children } = item;
       if (meta) prev.push(meta);
       if (children) prev.push(...flattenRoutes(children));
       return prev;
@@ -52,8 +54,5 @@ function BreadCrumb() {
     const menuRoutes = getMenuRoutes();
     setFlattenedRoutes(flattenRoutes(menuRoutes));
   }, [flattenRoutes]);
-
   return <Breadcrumb items={breadCrumbs} separator={separator} />;
 }
-
-export default BreadCrumb;

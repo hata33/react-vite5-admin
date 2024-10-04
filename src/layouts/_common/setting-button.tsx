@@ -1,35 +1,43 @@
 import { CloseOutlined } from '@ant-design/icons';
-import { Button, Card, Drawer, theme } from 'antd';
+import { Button, Card, Drawer } from 'antd';
+import { m } from 'framer-motion';
 import { CSSProperties, useState } from 'react';
 import { MdCircle } from 'react-icons/md';
-
 import screenfull from 'screenfull';
 
-import CyanBlur from '@/assets/images/background/cyan-blur.png';
-import RedBlur from '@/assets/images/background/red-blur.png';
+import CyanBlur from '@/assets/images/cyan-blur.png';
+import RedBlur from '@/assets/images/red-blur.png';
+import { varHover } from '@/components/animate/variants/action';
 import { SvgIcon } from '@/components/icon';
 import { useSettingActions, useSettings } from '@/store/settingStore';
 import { colorPrimarys } from '@/theme/antd/theme';
+import { useThemeToken } from '@/theme/hooks';
 
 import { ThemeColorPresets, ThemeLayout, ThemeMode } from '#/enum';
 
-const { useToken } = theme;
-
-function Settings() {
+/**
+ * App Setting
+ */
+export default function SettingButton() {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const {
-    token: { colorPrimary, colorBgBase, colorTextSecondary },
-  } = useToken();
+  const { colorPrimary, colorBgBase, colorTextSecondary } = useThemeToken();
+
   const settings = useSettings();
   const { themeMode, themeColorPresets, themeLayout } = settings;
   const { setSettings } = useSettingActions();
 
   const setThemeMode = (themeMode: ThemeMode) => {
-    setSettings({ ...settings, themeMode });
+    setSettings({
+      ...settings,
+      themeMode,
+    });
   };
 
   const setThemeColorPresets = (themeColorPresets: ThemeColorPresets) => {
-    setSettings({ ...settings, themeColorPresets });
+    setSettings({
+      ...settings,
+      themeColorPresets,
+    });
   };
 
   const setThemeLayout = (themeLayout: ThemeLayout) => {
@@ -41,7 +49,6 @@ function Settings() {
 
   const style: CSSProperties = {
     backdropFilter: 'blur(20px)',
-    backgroundImage: `url("${CyanBlur}"),url("${RedBlur}")`,
     backgroundRepeat: 'no-repeat, no-repeat',
     backgroundPosition: 'right top, left bottom',
     backgroundSize: '50, 50%',
@@ -51,6 +58,7 @@ function Settings() {
   const bodyStyle: CSSProperties = {
     padding: 0,
   };
+
   const [isFullscreen, setIsFullscreen] = useState(screenfull.isFullscreen);
   const toggleFullScreen = () => {
     if (screenfull.isEnabled) {
@@ -66,13 +74,27 @@ function Settings() {
 
   return (
     <>
-      <div className="animate-spin-slow">
-        <button
-          onClick={() => setDrawerOpen(true)}
-          className="flex h-10 w-10 transform-none cursor-pointer items-center justify-center rounded-full hover:scale-105 hover:bg-hover"
+      <div className="flex items-center justify-center">
+        <m.div
+          animate={{
+            rotate: [0, drawerOpen ? 0 : 360],
+          }}
+          transition={{
+            duration: 12,
+            ease: 'linear',
+            repeat: Infinity,
+          }}
         >
-          <SvgIcon icon="ic-setting" size="24" />
-        </button>
+          <m.button
+            whileTap="tap"
+            whileHover="hover"
+            variants={varHover(1.05)}
+            onClick={() => setDrawerOpen(true)}
+            className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-hover"
+          >
+            <SvgIcon icon="ic-setting" size="24" />
+          </m.button>
+        </m.div>
       </div>
       <Drawer
         placement="right"
@@ -275,4 +297,3 @@ function Settings() {
     </>
   );
 }
-export default Settings;

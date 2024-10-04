@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 
-import BasicLayout from '@/layouts';
+import DashboardLayout from '@/layouts/dashboard';
 import { useUserToken } from '@/store/userStore';
 
 export default function AuthenticatedRoute() {
@@ -13,5 +13,5 @@ export default function AuthenticatedRoute() {
   }
 
   // 如果已经授权，则直接渲染子组件
-  return <BasicLayout />;
+  return <DashboardLayout />;
 }
