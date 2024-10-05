@@ -28,6 +28,14 @@ const signIn = http.post(`/api${UserApi.SignIn}`, async ({ request }) => {
   });
 });
 
+const logout = http.get(`/api${UserApi.Logout}`, async ({ request }) => {
+  return HttpResponse.json({
+    status: 0,
+    message: '',
+    data: {},
+  });
+});
+
 const userList = http.get('/api/user', async () => {
   await delay(1000);
   return HttpResponse.json(
@@ -43,4 +51,4 @@ const userList = http.get('/api/user', async () => {
   );
 });
 
-export default [signIn, userList];
+export default [signIn, logout, userList];

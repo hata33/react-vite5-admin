@@ -18,6 +18,7 @@ export default function SvgIcon({
   style = {},
 }: SvgIconProps) {
   const symbolId = `#${prefix}-${icon}`;
+
   const svgStyle: CSSProperties = {
     verticalAlign: 'middle',
     width: size,

@@ -21,7 +21,7 @@ function DashboardLayout() {
       <ProgressBar />
 
       {/* <!-- ===== Page Wrapper Start ===== --> */}
-      <Layout className="flex h-screen overflow-hidden">
+      <div className="flex h-screen overflow-hidden">
         {/* <!-- ===== Sidebar Start ===== --> */}
         {themeLayout !== ThemeLayout.Horizontal ? (
           <div
@@ -36,13 +36,7 @@ function DashboardLayout() {
         {/* <!-- ===== Sidebar End ===== --> */}
 
         {/* <!-- ===== Content Area Start ===== --> */}
-        <div
-          className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden"
-          style={{
-            color: colorTextBase,
-            background: colorBgElevated,
-          }}
-        >
+        <div className="flex flex-1 flex-col">
           {/* <!-- ===== Header Start ===== --> */}
           <Header />
           {/* <!-- ===== Header End ===== --> */}
@@ -54,7 +48,7 @@ function DashboardLayout() {
           {/* <!-- ===== Main Content End ===== --> */}
         </div>
         {/* <!-- ===== Content Area End ===== --> */}
-      </Layout>
+      </div>
       {/* <!-- ===== Page Wrapper End ===== --> */}
     </>
   );
