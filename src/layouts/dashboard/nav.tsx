@@ -131,7 +131,7 @@ export default function Nav(props: Props) {
           <Logo className="h-10 w-10" />
           {themeLayout !== ThemeLayout.Mini ? (
             <h1 className="ml-2 text-base font-semibold" style={{ color: colorPrimary }}>
-              Slash Admin
+              Hata Admin
             </h1>
           ) : null}
           <button
