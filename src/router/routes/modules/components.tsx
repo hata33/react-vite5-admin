@@ -4,6 +4,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import Loading from '@/components/loading';
 
 const Animate = lazy(() => import('@/pages/components/animate'));
+const ThemeSwitch = lazy(() => import('@/pages/components/themeSwitch'));
 
 import { AppRouteObject } from '#/router';
 
@@ -24,7 +25,15 @@ const components: AppRouteObject = {
     {
       path: '/components/animate',
       element: <Animate />,
-      meta: { title: 'sys.menu.animate', icon: 'icon-animate', key: '/components/animate' },
+      meta: { title: 'sys.menu.animate', key: '/components/animate' },
+    },
+    {
+      path: '/components/themeSwitch',
+      element: <ThemeSwitch />,
+      meta: {
+        title: '主题切换',
+        key: '/components/themeSwitch',
+      },
     },
   ],
 };

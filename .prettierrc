@@ -1,12 +1,12 @@
 {
-  "printWidth": 100, 
-  "semi": true, 
+  "printWidth": 150,
+  "semi": true,
   "tabWidth": 2,
   "singleQuote": true,
-  "trailingComma": "all", 
-  "proseWrap": "never", 
-  "htmlWhitespaceSensitivity": "strict", 
-  "endOfLine": "auto", 
+  "trailingComma": "all",
+  "proseWrap": "never",
+  "htmlWhitespaceSensitivity": "strict",
+  "endOfLine": "auto",
   "overrides": [
     {
       "files": "*rc",
@@ -15,7 +15,5 @@
       }
     }
   ],
-  "plugins": [
-    "prettier-plugin-tailwindcss"
-  ]
+  "plugins": ["prettier-plugin-tailwindcss"]
 }

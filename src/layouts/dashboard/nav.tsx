@@ -154,6 +154,7 @@ export default function Nav(props: Props) {
           onOpenChange={onOpenChange}
           onClick={onClick}
           style={menuStyle}
+          inlineCollapsed={collapsed}
         />
         {/* <!-- Sidebar Menu --> */}
       </div>

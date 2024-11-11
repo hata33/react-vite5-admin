@@ -1,0 +1,66 @@
+.css-var-container {
+  --primary-color: #1890ff;
+  --background-color: #fff;
+  --text-color: #333;
+  --border-color: #ccc;
+
+  font-family: Arial, sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+.css-var-container2 {
+  --primary-color: #1890ff;
+  --background-color: #fff;
+  --text-color: #333;
+  --border-color: #ccc;
+
+  font-family: Arial, sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+button {
+  padding: 5px;
+  margin-right: 10px;
+  color: white;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  filter: brightness(110%);
+}
+
+section {
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+}
+
+h2 {
+  color: var(--primary-color);
+}
+
+p {
+  line-height: 1.6;
+}
+
+/* 黑夜模式 */
+.css-var-container.night-mode {
+  --primary-color: #ff6b6b;
+  --background-color: #121212;
+  --text-color: #fff;
+  --border-color: #444;
+}
+
+/* 夜间模式 */
+.css-var-container.night-time-mode {
+  --primary-color: #00bfa5;
+  --background-color: #1c1c1c;
+  --text-color: #e0e0e0;
+  --border-color: #333;
+}
